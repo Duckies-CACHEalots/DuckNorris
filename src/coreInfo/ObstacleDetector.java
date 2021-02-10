@@ -12,9 +12,9 @@ public class ObstacleDetector {
     }
 
 
-    public boolean checkCollision(Cell c1, Cell c2){
-        return  c1.equals(c2);
-    }
+    //public boolean checkCollision(Cell c1, Cell c2){
+    //   return  c1.equals(c2);
+    //}
 
 
     public boolean isCellAvailable(Cell currentPosition, DirectionType direction) {
@@ -61,7 +61,7 @@ public class ObstacleDetector {
         return true;
     }
 
-    public boolean nextUpCell(Cell origin){
+    /*public boolean nextUpCell(Cell origin){
         if(origin.getRow() == 0){
             return false;
         }
@@ -70,7 +70,7 @@ public class ObstacleDetector {
         //}
         // origin.getRow()-1
         return true;
-    }
+    }*/
 
 
 }

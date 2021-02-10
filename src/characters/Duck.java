@@ -12,11 +12,13 @@ public class Duck {
     private Cell position;
     private Picture pic;
 
+
+
     public Duck(String name){
         this.name = name;
-        setPic(new Picture(initialPosCol* Grid.CELLSIZE+Grid.PADDING,
-                          initialPosRow*Grid.CELLSIZE+Grid.PADDING,
-                           "resources/duckRight 50x50.png"));
+        setPic(new Picture( initialPosCol* Grid.CELLSIZE+Grid.PADDING,
+                            initialPosRow*Grid.CELLSIZE+Grid.PADDING,
+                            "resources/duckLeft.png"));
 
         this.position = new Cell(initialPosCol,initialPosRow);
     }
@@ -44,5 +46,8 @@ public class Duck {
     public Picture getPic() {
         return pic;
     }
+
+
+
 
 }

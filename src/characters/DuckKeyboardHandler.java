@@ -30,14 +30,15 @@ public class DuckKeyboardHandler implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()){
             case KeyboardEvent.KEY_UP:
-               if (!colisionDetector.isCellAvailable(duck.getPosition(), DirectionType.UP)){
+
+                if (!colisionDetector.isCellAvailable(duck.getPosition(), DirectionType.UP)){
                     return;
                }
                 pic.translate(0, -moveUP);
                 duck.getPosition().setRow(duck.getPosition().getRow() - 1);
 
 
-                //need to check if next cells are visible, if they are there's no need to call defog.
+               // if ()//need to check if next cells are visible, if they are there's no need to call defog.
 
                 fieldOfVision.defog(DirectionType.UP);
 

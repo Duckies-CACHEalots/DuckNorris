@@ -3,6 +3,7 @@ package coreInfo;
 import layers.Grid;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Cell {
 
@@ -12,15 +13,16 @@ public class Cell {
     private boolean isEdge;
     private String type;
     private Rectangle rectangle;
+    private Picture picture;
     private boolean isVisible;
 
-    public Cell(){
+   /* public Cell(){
         this.isObstacle = false;
         this.isEdge = false;
         this.rectangle = new Rectangle();
         this.rectangle.setColor(Color.BLACK);
         this.isVisible = false;
-    }
+    }*/
 
 
     public Cell(int col, int row){
@@ -67,9 +69,9 @@ public class Cell {
         return isObstacle;
     }
 
-    public void setEdge(boolean edge) {
-        isEdge = edge;
-    }
+    //public void setEdge(boolean edge) {
+    //    isEdge = edge;
+    // }
 
     public boolean isEdge() {
         return isEdge;
@@ -81,6 +83,14 @@ public class Cell {
 
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
+    public Picture getPicture() {
+        return picture;
     }
 
     public boolean isVisible() {
