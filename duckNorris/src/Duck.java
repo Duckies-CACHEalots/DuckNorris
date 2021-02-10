@@ -5,17 +5,18 @@ public class Duck {
     private String name;
     private Cell position;
     private Picture pic;
+    private int initialPosCol = 0;
+    private int initialPosRow = 0;
 
     public Duck(String name){
         this.name = name;
-        setPic(new Picture(Grid.PADDING, Grid.PADDING, "resources/duckRight 50x50.png"));
-        this.position = new Cell();
+        setPic(new Picture(initialPosCol * Grid.CELLSIZE + Grid.PADDING,
+                initialPosRow * Grid.CELLSIZE + Grid.PADDING,
+                "resources/duckRight 50x50.png"));
+        this.position = new Cell(initialPosCol, initialPosRow);
     }
 
     public void init(){
-        // initialize position
-        position.setCol(0);
-        position.setRow(0);
         pic.draw();
     }
 

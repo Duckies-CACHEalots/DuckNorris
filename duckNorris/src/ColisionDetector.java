@@ -2,6 +2,11 @@ public class ColisionDetector {
 
     private Grid grid;
 
+    public ColisionDetector(){
+
+    }
+
+
     public ColisionDetector(Grid grid){
         this.grid = grid;
     }
@@ -27,7 +32,6 @@ public class ColisionDetector {
 
 
             case DOWN:
-                    System.out.println(currentPosition.getRow());
                 if(currentPosition.getRow() == grid.getRows() - 1){
                     return false;
                 }
@@ -61,10 +65,6 @@ public class ColisionDetector {
         if(origin.getRow() == 0){
             return false;
         }
-        //if(origin.getRow() ){
-
-        //}
-        // origin.getRow()-1
         return true;
     }
 

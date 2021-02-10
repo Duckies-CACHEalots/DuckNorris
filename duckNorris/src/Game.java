@@ -12,7 +12,8 @@ public class Game {
     private Duck duckNorris;
     private Grid grid;
     private ColisionDetector colisionDetector;
-
+    private final int CROCODILESNUMBER = 7;
+    private Crocodile[] crocodiles;
 
     public Game(){
 
@@ -26,6 +27,18 @@ public class Game {
         grid = new Grid();
 
         colisionDetector = new ColisionDetector(grid);
+        //----------------------------------------------------------------------
+        crocodiles = new Crocodile[CROCODILESNUMBER];
+       // crocodiles[0] = new Crocodile("Crocodile 1", 21, 10, CrocodileDirectionType.VERTICAL);
+
+
+        crocodiles[0] = new Crocodile("Crocodile 1", 0, 15, CrocodileDirectionType.VERTICAL);
+        crocodiles[1] = new Crocodile("Crocodile 2", 5, 9, CrocodileDirectionType.HORIZONTAL);
+        crocodiles[2] = new Crocodile("Crocodile 3", 11, 13, CrocodileDirectionType.VERTICAL);
+        crocodiles[3] = new Crocodile("Crocodile 4", 21, 17, CrocodileDirectionType.HORIZONTAL);
+        crocodiles[4] = new Crocodile("Crocodile 5", 17, 6, CrocodileDirectionType.VERTICAL);
+        crocodiles[5] = new Crocodile("Crocodile 6", 27, 0, CrocodileDirectionType.HORIZONTAL);
+        crocodiles[6] = new Crocodile("Crocodile 7", 27, 10, CrocodileDirectionType.HORIZONTAL);
     }
 
     public void init(){
@@ -40,9 +53,31 @@ public class Game {
         grid.init();
         duckNorris.init();
 
+        //---------------------------------------------
+
+        for (Crocodile crocodile : crocodiles) {
+
+            crocodile.init();
+            crocodile.setColisionDetector(colisionDetector);
+            crocodile.setGrid(grid);
+        }
     }
 
     public void start(){
+
+        while (true){
+            for (Crocodile crocodile : crocodiles) {
+                crocodile.move();
+            }
+
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+        }
 
 
     }
