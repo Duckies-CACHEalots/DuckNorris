@@ -29,14 +29,16 @@ public class Game {
 
         // implement keyboard handler
         duckKeyboardHandler = new DuckKeyboardHandler(duckNorris);
+        
         // instantiate keyboard
         keyboard = new Keyboard(duckKeyboardHandler);
-
+        
+        //instantiate grid && obstacles
         grid = new Grid();
-
-        colisionDetector = new ObstacleDetector(grid);
-
-        this.fog = new FogLayer(grid);
+        obstacleDetector = new ObstacleDetector(grid);
+        
+        // instantiates fog layer on top of the game board and creates the field of vision in which the ducks has visibility
+        this.fog = new FogLayer();
         this.fieldOfVision = new FieldOfVision(fog, duckNorris.getPosition());
 
 
@@ -56,7 +58,6 @@ public class Game {
         duckNorris.init();
         fog.init();
         fieldOfVision.init();
-        fieldOfVision.setCenterPos(duckNorris.getPosition());
         duckKeyboardHandler.setFieldOfVision(fieldOfVision);
 
     }

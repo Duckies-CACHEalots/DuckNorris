@@ -69,9 +69,9 @@ public class Cell {
         return isObstacle;
     }
 
-    //public void setEdge(boolean edge) {
-    //    isEdge = edge;
-    // }
+    public void setEdge(boolean edge) {
+      isEdge = edge;
+    }
 
     public boolean isEdge() {
         return isEdge;
@@ -100,4 +100,6 @@ public class Cell {
     public void setVisible() {
         isVisible = true;
     }
+
+
 }

@@ -7,17 +7,13 @@ public class FieldOfVision {
 
     private int visibleCol = 5;
     private int visibleRow = 5;
-    private Cell[][] defogScope; // array 5*5 where duck has light on
+    private Cell[][] defogScope;  // array 3*3 where duck has light on
     private FogLayer fog;
-    private Cell centerPos;
     private Cell duckPosition;
     private int cellToEdgeCol;
     private int cellToEdgeRow;
     private int topBorder;
-    private int bottomBorder;
     private int leftBorder;
-    private int rightBorder;
-    //private Grid background;
 
     public FieldOfVision(FogLayer fog, Cell duckPosition) {
 
@@ -32,7 +28,6 @@ public class FieldOfVision {
 
     public void init() {
 
-        centerPos = duckPosition;
         recenterFieldOfVision();
 
         // creates all the cells based on the duck's location
@@ -46,94 +41,45 @@ public class FieldOfVision {
     }
 
 
-    public void recenterFieldOfVision(){
+    public void recenterFieldOfVision() {
         // defines the borders of the illumination scope
-        topBorder = centerPos.getRow() - cellToEdgeRow;
-        bottomBorder = centerPos.getRow() + cellToEdgeRow;
-        leftBorder = centerPos.getCol() - cellToEdgeCol;
-        rightBorder = centerPos.getCol() + cellToEdgeCol;
+        topBorder = duckPosition.getRow() - cellToEdgeRow;
+        topBorder = topBorder < 0 ? 0 : topBorder;
+        topBorder = topBorder > (Grid.ROWS - visibleRow) ? Grid.ROWS - visibleRow : topBorder;
+
+        leftBorder = duckPosition.getCol() - cellToEdgeCol;
+        leftBorder = leftBorder < 0 ? 0 : leftBorder;
+        leftBorder = leftBorder > (Grid.COLS - visibleCol) ? Grid.COLS - visibleCol : leftBorder;
+    }
+
+
+    public void defog(DirectionType direction) {
+
+        recenterFieldOfVision();
+
+        defoggingScope();
     }
 
 
 
-    public void defog(DirectionType direction) throws ArrayIndexOutOfBoundsException{
+    public void defoggingScope() {
 
-        // initializes fov[0][0] on duck's position
-        centerPos = duckPosition;
-        recenterFieldOfVision(); // defines the borders of the scope
-
-            switch (direction) {
-
-                // all cases throw ArrayIndexOutOfBoundsException when they reach the edges using the keypressed method fully
-
-
-                case UP:
-
-                    topBorder--;
-                    
-                  for (int i = 0; i < visibleCol; i++) {
-                        for (int j = 0; j < visibleRow; j++) {
-                            defogScope[i][j] = fog.getFog()[leftBorder + i][topBorder + 1];
-                        }
-                    }
-                    defoggingScope();
-                    break;
-
-
-                case DOWN:
-
-                    topBorder++;
-
-                    for (int i = 0; i < visibleCol; i++) {
-                        for (int j = 0; j < visibleRow; j++) {
-                            defogScope[i][j] = fog.getFog()[rightBorder - i][bottomBorder - j];
-                        }
-                    }
-                    defoggingScope();
-                    break;
-
-
-                case LEFT:
-
-                    leftBorder--;
-                    for (int i = 0; i < visibleCol; i++) {
-                        for (int j = 0; j < visibleRow; j++) {
-                            defogScope[i][j] = fog.getFog()[leftBorder + 1][bottomBorder - j];
-                        }
-                    }
-                    defoggingScope();
-                    break;
-
-                case RIGHT:
-                    leftBorder++;
-
-                    for (int i = 0; i < visibleCol; i++) {
-                        for (int j = 0; j < visibleRow; j++) {
-                            defogScope[i][j] = fog.getFog()[leftBorder + i][topBorder + j];
-                        }
-                        defoggingScope();
-                    }
-                    break;
-
+        for (int i = 0; i < visibleCol; i++) {
+            for (int j = 0; j < visibleRow; j++) {
+                defogScope[i][j] = fog.getFog()[leftBorder + i][topBorder + j];
             }
         }
 
-
-
-    public void setCenterPos(Cell centerPos) {
-        this.centerPos = centerPos;
-    }
-
-
-    public void defoggingScope(){
-        for (int i = 0; i < visibleRow; i++) {
+        for (int i = 0; i < visibleCol; i++) {
             for (int j = 0; j < visibleRow; j++) {
                 if (!defogScope[i][j].isVisible()) {
                     defogScope[i][j].setVisible();
                     defogScope[i][j].getPicture().delete();
                 }
             }
-
         }
     }
+
 }
+
+

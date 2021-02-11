@@ -8,23 +8,23 @@ public class Grid {
 
 
     public static final int CELLSIZE = 50;
-    private final int cols = 30;
-    private final int rows = 18;
+    public static final int COLS = 30;
+    public static final int ROWS = 18;
     public static final int PADDING = 10;
-    //public final int MAX_WIDTH = cols * CELLSIZE;
-    //public final int MAX_HEIGHT = rows * CELLSIZE;
-    private Obstacle obstacle;
 
-    private Cell[][] coordinates;
+
+    private Obstacle obstacle;
+    private Cell[][] coordinates; // array of cells that compose the grid
     private Picture background;
+
 
     public Grid() {
         background = new Picture(PADDING, PADDING, "resources/bg.jpeg");
 
-        coordinates = new Cell[cols][rows];
+        coordinates = new Cell[COLS][ROWS];
 
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < COLS; i++) {
+            for (int j = 0; j < ROWS; j++) {
                 coordinates[i][j] = new Cell(i, j);
                 coordinates[i][j].setRectangle(new Rectangle(i * CELLSIZE + PADDING, j * CELLSIZE + PADDING, CELLSIZE, CELLSIZE));
             }
@@ -38,6 +38,7 @@ public class Grid {
         background.draw();
         obstacle.creation();
 
+
     }
 
 
@@ -45,13 +46,7 @@ public class Grid {
         return coordinates;
     }
 
-    public int getCols() {
-        return cols;
-    }
 
-    public int getRows() {
-        return rows;
-    }
 
 
 
@@ -274,4 +269,5 @@ public class Grid {
         }
 
     }
+
 }

@@ -32,7 +32,7 @@ public class ObstacleDetector {
 
 
             case DOWN:
-                if(currentPosition.getRow() == grid.getRows() - 1){
+                if(currentPosition.getRow() == Grid.ROWS - 1){
                     return false;
                 }
                 if(grid.getCoordinates()[currentPosition.getCol()][currentPosition.getRow() + 1].isObstacle()){
@@ -50,7 +50,7 @@ public class ObstacleDetector {
                 break;
 
             case RIGHT:
-                if(currentPosition.getCol() == grid.getCols() - 1){
+                if(currentPosition.getCol() == Grid.COLS - 1){
                     return false;
                 }
                 if(grid.getCoordinates()[currentPosition.getCol() + 1][currentPosition.getRow()].isObstacle()){
