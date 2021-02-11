@@ -11,6 +11,8 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import javax.swing.table.TableRowSorter;
+
 public class Game {
 
 
@@ -21,14 +23,16 @@ public class Game {
     private ObstacleDetector colisionDetector;
     private FieldOfVision fieldOfVision;
     private FogLayer fog;
+   public Picture startpic;
 
     public Game(){
 
         duckNorris = new Duck("Duck Norris");
 
+        startpic = new Picture (10, 10, "resources/startpic1.jpeg");
 
         // implement keyboard handler
-        duckKeyboardHandler = new DuckKeyboardHandler(duckNorris);
+        duckKeyboardHandler = new DuckKeyboardHandler(duckNorris, startpic);
         // instantiate keyboard
         keyboard = new Keyboard(duckKeyboardHandler);
 
@@ -48,11 +52,15 @@ public class Game {
         keyboard.addEventListener(KeyboardEvent.KEY_DOWN, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_LEFT, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_RIGHT, KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(KeyboardEvent.KEY_S, KeyboardEventType.KEY_PRESSED);
 
         duckKeyboardHandler.setColisionDetector(colisionDetector);
 
 
         grid.init();
+
+
+
 
         Picture background = new Picture(10,10, "resources/bgcolor.jpg");
         background.draw();
@@ -62,6 +70,18 @@ public class Game {
         fieldOfVision.init();
         fieldOfVision.setCenterPos(duckNorris.getPosition());
         duckKeyboardHandler.setFieldOfVision(fieldOfVision);
+
+        startpic.draw();
+
+        /*try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } {
+
+        }*/
+
+
 
     }
 
