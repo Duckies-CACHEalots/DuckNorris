@@ -1,6 +1,9 @@
 public class ColisionDetector {
 
     private Grid grid;
+    private Duck duck;
+    private Crocodile[] crocodiles;
+
 
     public ColisionDetector(){
 
@@ -12,10 +15,18 @@ public class ColisionDetector {
     }
 
 
-    public boolean checkCollision(Cell c1, Cell c2){
-        return  c1.equals(c2);
+    public boolean checkCollision(Cell currentPosition, Cell target){
+        return  currentPosition.equals(target);
     }
 
+    public boolean checkCollision(Cell currentPosition, Cell[] targets){
+        boolean result = false;
+
+        for(Cell target : targets){
+            result = result || checkCollision(currentPosition, target);
+        }
+        return result;
+    }
 
     public boolean isCellAvailable(Cell currentPosition, DirectionType direction) {
 
@@ -61,12 +72,21 @@ public class ColisionDetector {
         return true;
     }
 
-    public boolean nextUpCell(Cell origin){
-        if(origin.getRow() == 0){
-            return false;
-        }
-        return true;
+
+
+    public void setDuck(Duck duck) {
+        this.duck = duck;
     }
 
+    public Duck getDuck() {
+        return duck;
+    }
 
+    public void setCrocodiles(Crocodile[] crocodiles) {
+        this.crocodiles = crocodiles;
+    }
+
+    public Crocodile[] getCrocodiles() {
+        return crocodiles;
+    }
 }

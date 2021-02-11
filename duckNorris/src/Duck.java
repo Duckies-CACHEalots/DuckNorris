@@ -5,8 +5,10 @@ public class Duck {
     private String name;
     private Cell position;
     private Picture pic;
-    private int initialPosCol = 0;
+    private int initialPosCol = 7;
     private int initialPosRow = 0;
+    private int lives;
+    private final int NUMBEROFLIVES = 3;
 
     public Duck(String name){
         this.name = name;
@@ -14,6 +16,17 @@ public class Duck {
                 initialPosRow * Grid.CELLSIZE + Grid.PADDING,
                 "resources/duckRight 50x50.png"));
         this.position = new Cell(initialPosCol, initialPosRow);
+        this.lives = NUMBEROFLIVES;
+    }
+
+    public void goToInitialPosition(){
+        int posXI = position.getCol() * Grid.CELLSIZE + Grid.PADDING;
+        int posYI = position.getRow() * Grid.CELLSIZE + Grid.PADDING;
+        this.position = new Cell(initialPosCol, initialPosRow);
+        int posXF = position.getCol() * Grid.CELLSIZE + Grid.PADDING;
+        int posYF = position.getRow() * Grid.CELLSIZE + Grid.PADDING;
+        pic.translate(posXF - posXI, posYF - posYI);
+        pic.draw();
     }
 
     public void init(){
@@ -40,4 +53,11 @@ public class Duck {
         return pic;
     }
 
+    public void decreaseLives(){
+        this.lives = --lives;
+    }
+
+    public int getLives() {
+        return lives;
+    }
 }

@@ -1,19 +1,17 @@
-
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
-
 
     private DuckKeyboardHandler duckKeyboardHandler;
     private Keyboard keyboard;
     private Duck duckNorris;
     private Grid grid;
     private ColisionDetector colisionDetector;
-    private final int CROCODILESNUMBER = 7;
+    private final int crocodilesNumber = 7;
     private Crocodile[] crocodiles;
+    private boolean gameOver;
 
     public Game(){
 
@@ -28,10 +26,7 @@ public class Game {
 
         colisionDetector = new ColisionDetector(grid);
         //----------------------------------------------------------------------
-        crocodiles = new Crocodile[CROCODILESNUMBER];
-       // crocodiles[0] = new Crocodile("Crocodile 1", 21, 10, CrocodileDirectionType.VERTICAL);
-
-
+        crocodiles = new Crocodile[crocodilesNumber];
         crocodiles[0] = new Crocodile("Crocodile 1", 0, 15, CrocodileDirectionType.VERTICAL);
         crocodiles[1] = new Crocodile("Crocodile 2", 5, 9, CrocodileDirectionType.HORIZONTAL);
         crocodiles[2] = new Crocodile("Crocodile 3", 11, 13, CrocodileDirectionType.VERTICAL);
@@ -43,6 +38,8 @@ public class Game {
 
     public void init(){
 
+        gameOver = false;
+
         keyboard.addEventListener(KeyboardEvent.KEY_UP, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_DOWN, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_LEFT, KeyboardEventType.KEY_PRESSED);
@@ -53,32 +50,41 @@ public class Game {
         grid.init();
         duckNorris.init();
 
-        //---------------------------------------------
-
         for (Crocodile crocodile : crocodiles) {
-
             crocodile.init();
             crocodile.setColisionDetector(colisionDetector);
             crocodile.setGrid(grid);
         }
+        //colisionDetector.setCrocodiles(crocodiles);
     }
 
     public void start(){
 
-        while (true){
+        while(!gameOver){
+
             for (Crocodile crocodile : crocodiles) {
                 crocodile.move();
+
+                if (colisionDetector.checkCollision(duckNorris.getPosition(), crocodile.getPositions())) {
+                    duckNorris.decreaseLives();
+                    System.out.println("crashou. Lives: " + duckNorris.getLives());
+                    duckNorris.goToInitialPosition();
+
+                    if(duckNorris.getLives() == 0){
+                        System.out.println("Game Over");
+                        gameOver = true;
+                    }
+                }
             }
 
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
 
+            }
 
         }
-
 
     }
 

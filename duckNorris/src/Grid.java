@@ -13,7 +13,7 @@ public class Grid {
 
     private Cell[][] coordinates;
     private Rectangle background;
-
+    
     public Grid(){
         background = new Rectangle(PADDING, PADDING, MAX_WIDTH, MAX_HEIGHT);
 

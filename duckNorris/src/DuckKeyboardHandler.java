@@ -53,6 +53,9 @@ public class DuckKeyboardHandler implements KeyboardHandler {
                 break;
             default:
         }
+        //for (Crocodile c : colisionDetector.getCrocodiles()) {
+        //    colisionDetector.checkCollision(duck.getPosition(), c.getPositions());
+        //}
     }
 
     @Override
