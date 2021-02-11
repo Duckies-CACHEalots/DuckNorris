@@ -22,12 +22,12 @@ public class Duck {
     public Duck(String name){
         this.name = name;
 
-        this.duckName = setPic("resources/duckLeft.png");
+        //this.duckName = setPic("resources/duckLeft.png");
 
         pic = new Picture( initialPosCol* Grid.CELLSIZE+Grid.PADDING,
                             initialPosRow*Grid.CELLSIZE+Grid.PADDING,
-                            //"resources/duckLeft.png");
-                           duckName);
+                            "resources/duckLeft.png");
+
 
        /* picLeft = new Picture( initialPosCol* Grid.CELLSIZE+Grid.PADDING,
                 initialPosRow*Grid.CELLSIZE+Grid.PADDING,

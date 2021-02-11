@@ -22,7 +22,15 @@ public class DuckKeyboardHandler implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
+
+
+
         switch (keyboardEvent.getKey()){
+
+
+           // case KeyboardEvent.KEY_S:
+                //game/Game.startpic.delete();
+
             case KeyboardEvent.KEY_UP:
                 if (!colisionDetector.isCellAvailable(duck.getPosition(), DirectionType.UP)){
                     return;
