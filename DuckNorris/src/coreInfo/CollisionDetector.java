@@ -2,10 +2,15 @@ package coreInfo;
 
 import characters.DirectionType;
 import layers.Grid;
+import characters.Crocodile;
 
 public class CollisionDetector {
 
     private Grid grid;
+
+    public CollisionDetector(){
+
+    }
 
     public CollisionDetector(Grid grid){
         this.grid = grid;
@@ -14,6 +19,15 @@ public class CollisionDetector {
 
     public boolean checkCollision(Cell c1, Cell c2){
         return  c1.equals(c2);
+    }
+
+    public boolean checkCollision(Cell currentPosition, Cell[] targets){
+        boolean result = false;
+
+        for(Cell target : targets){
+            result = result || checkCollision(currentPosition, target);
+        }
+        return result;
     }
 
 

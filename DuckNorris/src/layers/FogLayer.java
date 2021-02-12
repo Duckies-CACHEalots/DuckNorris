@@ -18,31 +18,20 @@ public class FogLayer {
             for (int j = 0; j < Grid.ROWS ; j++) {
                 fog[i][j] = new Cell(i,j);
                 fog[i][j].setPicture(new Picture(i * Grid.CELLSIZE + Grid.PADDING, j * Grid.CELLSIZE + Grid.PADDING, "resources/fog.jpeg"));
-
-
-
             }
         }
-
     }
 
     public void init (){
         for (int i = 0; i < Grid.COLS ; i++) { // initializes fog layer
             for (int j = 0; j < Grid.ROWS; j++) {
                 fog[i][j].getPicture().draw();
-
             }
         }
-
-
-
-
     }
 
     public Cell[][] getFog() {
         return fog;
     }
-
-
 
 }

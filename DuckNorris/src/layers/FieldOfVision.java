@@ -1,6 +1,7 @@
 package layers;
 
 import characters.DirectionType;
+import characters.Duck;
 import coreInfo.Cell;
 
 public class FieldOfVision {
@@ -33,7 +34,8 @@ public class FieldOfVision {
         // creates all the cells based on the duck's location
         for (int i = 0; i < visibleCol; i++) {
             for (int j = 0; j < visibleRow; j++) {
-                defogScope[i][j] = fog.getFog()[(duckPosition.getCol()) - cellToEdgeCol + i][duckPosition.getRow() - cellToEdgeRow + j];
+                //defogScope[i][j] = fog.getFog()[(duckPosition.getCol()) - cellToEdgeCol + i][duckPosition.getRow() - cellToEdgeRow + j];
+                defogScope[i][j] = fog.getFog()[Duck.initialPosCol - cellToEdgeCol + i][Duck.initialPosRow - cellToEdgeRow + j];
                 defogScope[i][j].setVisible();
                 defogScope[i][j].getPicture().delete();
             }
@@ -61,6 +63,10 @@ public class FieldOfVision {
     }
 
 
+    public void restartBorders(){
+        topBorder = Duck.initialPosRow; // - cellToEdgeRow;
+        leftBorder = Duck.initialPosCol; // - cellToEdgeCol;
+    }
 
     public void defoggingScope() {
 
